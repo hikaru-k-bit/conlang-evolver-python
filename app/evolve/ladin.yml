@@ -1,0 +1,386 @@
+sections:
+  Phonology:
+    Inventory:
+      Vowels:
+        1:
+          sound: a
+          can_be_long: false
+        2:
+          sound: e
+          can_be_long: true
+        3:
+          sound: ε
+          can_be_long: true
+        4:
+          sound: i
+          can_be_long: false
+        5:
+          sound: o
+          can_be_long: false
+      Polyphthongs:
+        1:
+          sound: ai
+          can_be_long: false
+        2:
+          sound: au
+          can_be_long: false
+        3:
+          sound: ei
+          can_be_long: false
+        4:
+          sound: eu
+          can_be_long: false
+        5:
+          sound: oi
+          can_be_long: false
+        6:
+          sound: ou
+          can_be_long: false
+      Consonants:
+        1:
+          sound: m
+          type: nasal
+          can_be_allophone: false
+        2:
+          sound: n
+          type: nasal
+          can_be_allophone: false
+        3:
+          sound: ŋ
+          type: nasal
+          can_be_allophone: true
+          always_allophone: true
+        4:
+          sound: p
+          type: stop
+          can_be_allophone: false
+        5:
+          sound: b
+          type: stop
+          can_be_allophone: false
+        6:
+          sound: t
+          type: stop
+          can_be_allophone: false
+        7:
+          sound: d
+          type: stop
+          can_be_allophone: true
+          always_allophone: false
+        8:
+          sound: k
+          type: stop
+          can_be_allophone: false
+        9:
+          sound: g
+          type: stop
+          can_be_allophone: false
+        10:
+          sound: β
+          type: fricative
+          can_be_allophone: true
+          always_allophone: true
+        11:
+          sound: f
+          type: fricative
+          can_be_allophone: false
+        12:
+          sound: s
+          type: fricative
+          can_be_allophone: false
+        13:
+          sound: ð
+          type: fricative
+          can_be_allophone: true
+          always_allophone: true
+        14:
+          sound: γ
+          type: fricative
+          can_be_allophone: true
+          always_allophone: true
+        15:
+          sound: h
+          type: fricative
+          can_be_allophone: false
+        16:
+          sound: tʃ
+          type: affricate
+          can_be_allophone: true
+          always_allophone: true
+        17:
+          sound: dʒ
+          type: affricate
+          can_be_allophone: true
+          always_allophone: true
+        18:
+          sound: l
+          type: liquid
+          can_be_allophone: false
+        19:
+          sound: r
+          type: liquid
+          can_be_allophone: false
+        20:
+          sound: j
+          type: glide
+          can_be_allophone: false
+        21:
+          sound: w
+          type: glide
+          can_be_allophone: false
+    Evolution:
+      Vowel Changes:
+        Monophtongisation:
+          1:
+            original:
+              ipa: ae
+              orthography: ae
+            result:
+              ipa: "ε:"
+              orthography: ē
+            conditions:
+              - exception: "$1.$2" # components are in different syllables
+          2:
+            original:
+              ipa: oe
+              orthography: oe
+            result:
+              ipa: "e:"
+              orthography: é
+            conditions:
+              - exception: "$1.$2" # components are in different syllables
+        Vowel Raising and Lowering:
+          1:
+            original:
+              ipa: a
+              orthography: a
+            result:
+              ipa: "ε"
+              orthography: ë
+            conditions:
+              - environment: "_N" # sound followed by a nasal
+          2:
+            original:
+              ipa: e
+              orthography: e
+            result:
+              ipa: "a"
+              orthography: a
+            conditions:
+              - environment: "_r" # sound followed by an /r/
+        Vowel Length Reduction:
+          1:
+            original:
+              ipa: "V:" # V is any vowel
+              orthography: ā
+            result:
+              ipa: "V" # V is any vowel
+              orthography: a
+            conditions:
+              - exception: "'" # sound is stressed
+      Consonant Changes:
+        Lenition:
+          1:
+            original:
+              ipa: "p"
+              orthography: p
+            result:
+              ipa: "b"
+              orthography: b
+            conditions:
+              - environment: "V_V" # sound is between vowels
+          2:
+            original:
+              ipa: "t"
+              orthography: t
+            result:
+              ipa: "d"
+              orthography: d
+            conditions:
+              - environment: "V_V" # sound is between vowels
+          3:
+            original:
+              ipa: "k"
+              orthography: k
+            result:
+              ipa: "g"
+              orthography: g
+            conditions:
+              - environment: "V_V" # sound is between vowels
+        Palatalisation:
+          1:
+            original:
+              ipa: "k"
+              orthography: c
+            result:
+              ipa: "tʃ"
+              orthography: c
+            conditions:
+              - environment: "_[ieε]" # sound is followed by an /i/, /e/ or /ε/
+          2:
+            original:
+              ipa: "g"
+              orthography: g
+            result:
+              ipa: "dʒ"
+              orthography: g
+            conditions:
+              - environment: "_[ieε]" # sound is followed by an /i/, /e/ or /ε/
+        Fricativisation:
+          1:
+            original:
+              ipa: "b"
+              orthography: b
+            result:
+              ipa: "β"
+              orthography: v
+            conditions:
+              - environment: "V_V" # sound is between vowels
+          2:
+            original:
+              ipa: "d"
+              orthography: d
+            result:
+              ipa: "ð"
+              orthography: d
+            conditions:
+              - environment: "V_V" # sound is between vowels
+          3:
+            original:
+              ipa: "g"
+              orthography: g
+            result:
+              ipa: "γ"
+              orthography: gh
+            conditions:
+              - environment: "V_V" # sound is between vowels
+        Nasalisation:
+          1:
+            original:
+              ipa: "n"
+              orthography: n
+            result:
+              ipa: "ŋ"
+              orthography: n
+            conditions:
+              - environment: "_[kg]" # sound is followed by a /k/ or /g/
+          2:
+            original:
+              ipa: "n"
+              orthography: n
+            result:
+              ipa: "m"
+              orthography: m
+            conditions:
+              - environment: "_[kg]" # sound is followed by a /k/ or /g/
+        Stress Changes:
+          Stress Shift:
+            1:
+              original:
+                position: penultimate
+              result:
+                position: initial
+              conditions:
+                - number_of_syllables: 3
+  Orthography:
+    Alphabet:
+      1:
+        letter: Aa
+        ipa: a
+      2:
+        letter: Bb
+        ipa: b
+      3:
+        letter: Cc
+        ipa: k
+      4:
+        letter: Dd
+        ipa: d
+      5:
+        letter: Ee
+        ipa: e
+      6:
+        letter: Éé
+        ipa: "e:"
+      7:
+        letter: Ëë
+        ipa: ɛ
+      8:
+        letter: Ēē
+        ipa: "ɛ:"
+      9:
+        letter: Ff
+        ipa: f
+      10:
+        letter: Gg
+        ipa: g
+      11:
+        letter: Ģģ
+        ipa: d͡ʒ
+      12:
+        letter: Hh
+        ipa: h
+      13:
+        letter: Ii
+        ipa: i
+      14:
+        letter: Jj
+        ipa: j
+      15:
+        letter: Ll
+        ipa: l
+      16:
+        letter: Mm
+        ipa: m
+      17:
+        letter: Nn
+        ipa: n
+      18:
+        letter: Oo
+        ipa: o
+      19:
+        letter: Pp
+        ipa: p
+      20:
+        letter: Qq
+        ipa: k
+      21:
+        letter: Rr
+        ipa: r
+      22:
+        letter: Ss
+        ipa: s
+      23:
+        letter: Tt
+        ipa: t
+      24:
+        letter: Uu
+        ipa: u
+      25:
+        letter: Vv
+        ipa: w
+    Evolution:
+      Consonant Changes:
+        Standardisation of Spellings:
+          1:
+            original:
+              grapheme: "u"
+            result:
+              grapheme: "v"
+            conditions:
+              - used_as: "consonant"
+          2:
+            original:
+              grapheme: "i"
+            result:
+              grapheme: "j"
+            conditions:
+              - used_as: "consonant"
+        Simplification of Doubled Consonants:
+          1:
+            original:
+              grapheme: "C%" # C is any consonant, % is the same consonant
+            result:
+              grapheme: "C"
+            conditions:
+              - exceptions: [ '"l"', '"r"' ]
