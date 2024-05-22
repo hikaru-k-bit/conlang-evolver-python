@@ -33,7 +33,11 @@ class Validator:
             raise ValueError("IPA must contain a stress mark to indicate the stressed syllable")
 
     def has_syllable_separation(self) -> None:
-        if '.' not in self.ipa:
+        # Check if the IPA contains stress mark or syllable separator
+        primary_stress = 'ˈ'
+        secondary_stress = 'ˌ'
+        syllable_separator = '.'
+        if primary_stress not in self.ipa and secondary_stress not in self.ipa and syllable_separator not in self.ipa:
             raise ValueError("IPA must contain a syllable separator to indicate syllable boundaries")
 
 
@@ -52,65 +56,3 @@ class Word:
         validator = Validator(word, ipa, declension)
         validator.validate()
         print(self.ipa)
-
-
-class Evolve:
-    def __init__(self, word: Word) -> None:
-        self.word = word
-
-    def stress_shift(self) -> Word:
-        ipa = self.word.ipa
-        syllables = re.split(r'[ˈˌ\'.]', ipa)
-        syllables = [s for s in syllables if s]  # Remove empty strings
-
-        if len(syllables) == 3:
-            # Add primary stress to the initial syllable
-            new_ipa = f'ˈ{syllables[0]}.{syllables[1]}.{syllables[2]}'
-            self.word.ipa = new_ipa
-        return self.word
-
-    def vowel_length_reduction(self) -> Word:
-        ipa = self.word.ipa
-
-        # Function to check if a vowel is stressed
-        def is_stressed(s):
-            return 'ˈ' in s or 'ˌ' in s or "'" in s
-
-        # Function to reduce vowel length
-        def reduce_vowel_length(s):
-            return s.replace(':', '').replace('ː', '')
-
-        syllables = ipa.split('.')
-        print(syllables)
-
-        # Process each syllable
-        new_syllables = []
-        for syllable in syllables:
-            if not is_stressed(syllable):
-                syllable = reduce_vowel_length(syllable)
-            new_syllables.append(syllable)
-
-        # Join the syllables back together
-        new_ipa = '.'.join(new_syllables)
-        self.word.ipa = new_ipa
-        return self.word
-
-    def vowel_raising(self) -> Word:
-        ipa = self.word.ipa
-
-        # Replace /a/ followed by a nasal consonant
-        ipa = re.sub(r'a([mn])', r'ε\1', ipa)
-        ipa = re.sub(r'a\.([mn])', r'ε.\1', ipa)
-
-        self.word.ipa = ipa
-        return self.word
-
-    def vowel_lowering(self) -> Word:
-        ipa = self.word.ipa
-
-        # Replace /e/ followed by /r/
-        ipa = re.sub(r'e(r)', r'a\1', ipa)
-        ipa = re.sub(r'e\.r', r'a.r', ipa)
-
-        self.word.ipa = ipa
-        return self.word

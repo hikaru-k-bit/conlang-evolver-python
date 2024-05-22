@@ -1,4 +1,8 @@
-from app.evolve.Word import Word, Evolve
+import colorama
+
+from app.evolve.Word import Word
+from app.evolve.Evolve import Evolve
+from app.logger.Logger import Logger
 
 
 def main():
@@ -7,17 +11,13 @@ def main():
     declension = int(input("Enter the declension of the word (1, 2, 3, 4, or 5): "))
     word = Word(word, ipa, declension)
     evolve = Evolve(word)
-    word = evolve.stress_shift()
-    print(f"Evolved word: {word.ipa}")
-    word = evolve.vowel_length_reduction()
-    print(f"Evolved word: {word.ipa}")
-    word = evolve.vowel_raising()
-    print(f"Evolved word: {word.ipa}")
-    word = evolve.vowel_lowering()
+    Logger.info("Initiating the evolution...")
+    word = evolve.evolve()
     print(f"Evolved word: {word.ipa}")
 
 
 if __name__ == '__main__':
+    colorama.init()
     # Name, version and author
     print("App: conlang-evolver-python")
     print("Version: 0.1")
